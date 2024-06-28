@@ -2,16 +2,16 @@
 
 
 # <center>Entrega de Proyecto Final SQL</center>
-Creación de una base de datos para una aplicación de café al paso
+
+### Creación de una base de datos para una aplicación de café al paso
+
 Paula Andrea Diaz
 
 Comisión: 57190
 
-@Tutor
+Tutor: Ariel Annone
 
-@Docente
-
-
+Docente: Anderson Torres
 
 ---
 

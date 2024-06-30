@@ -15,7 +15,7 @@ Docente: Anderson Torres
 
 ---
 
-## Tematica del proyecto
+## Temática del proyecto
 
 "CoffeeToGo" es una aplicación diseñada para ofrecer suscripciones mensuales que permiten a los usuarios retirar cafés en cualquiera de las cafeterías asociadas en Argentina. Los usuarios podrán seleccionar entre varios planes de suscripción que varían en precio y beneficios, mientras que las cafeterías asociadas se benefician de una base de clientes recurrentes y un mayor alcance de su clientela. La aplicación busca promover la comodidad y el acceso fácil a cafés de calidad para sus usuarios y apoyar a las cafeterías locales en la expansión de su mercado. A partir de lo anterior mencionado nace la necesidad de diseñar una base de datos eficiente que pueda manejar todas las operaciones relacionadas con los usuarios, las cafeterías, las suscripciones y  los consumos de manera óptima.
 
@@ -92,7 +92,7 @@ Oportunidad de promover promociones exclusivas a través de la aplicación.
 | DISCOUNT           |
 | START_DATE         |
 | END_DATE           |
-| APPLICABLE_TO_ADLL |
+| APPLICABLE_TO_ALL  |
 +--------------------+
 
 
@@ -199,4 +199,6 @@ A continuación se presentan las 10 tablas que componen la base de datos.
 |                 | COMMENT           | TEXT                                   |       | Comentario del usuario de la cafetería |
 |                 | REVIEW_DATE       | DATE                                   |       | Fecha de la review                     |
 
+## Script SQL para la creación de la base de datos y tablas
 
+Se adjunta en el repositorio el archivo CafeAlPaso_DiazPaula.sql con el script necesario para la creación de las base de datos, con sus tablas.

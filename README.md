@@ -202,3 +202,237 @@ A continuación se presentan las 10 tablas que componen la base de datos.
 ## Script SQL para la creación de la base de datos y tablas
 
 Se adjunta en el repositorio el archivo CafeAlPaso_DiazPaula.sql con el script necesario para la creación de las base de datos, con sus tablas.
+
+## Estructura e ingesta de datos
+* Se realiza principalmente por medio del archivo population.sql
+* La carga de la tabla users se realiza por medio de un csv colocado en el directorio ./structure/DATAUSERS.csv
+
+## Objetos de la base de datos
+
+
+### Documentacion de Vistas
+### Vista: USER_CONSUMPTION_SUMMARY_VW
+
+**Descripción:** Esta vista muestra el consumo total de café por usuario y el plan que tiene.
+
+**Columnas:**
+
+* **User_ID:** ID del usuario
+* **User_Name:** Concatena nombre y apellido
+* **Total_Consumptions:** cuenta la cantidad de consumiciones del usuario
+* **Subscription_plan:** plan de suscripción del usuario
+
+**Ejemplo de consulta:**
+
+```sql
+SELECT *
+FROM USER_CONSUMPTION_SUMMARY_VW
+ORDER BY TOTAL_CONSUMPTIONS DESC, USER_ID;
+```
+
+### Vista: ACTIVE_PROMOTIONS_VW
+
+**Descripción:** Esta vista muestra las promociones vigentes.
+
+**Columnas:**
+
+* **PROMOTION_NAME:** Nombre de la promoción
+* **DISCOUNT:** Descuento que hace la promoción
+* **START_DATE:** Fecha de inicio de la promoción
+* **END_DATE:** Fecha de finalización de la promoción
+* **APPLICABLE_TO_ALL:** Boolean si la aplicación es para todos o para usuarios seleccionados
+* **USER_ID:** usuario que tiene vigente la promoción
+* **PLAN_ID:** Plan en el que tendrá el descuento el usuario
+
+**Ejemplo de consulta:**
+
+```sql
+SELECT *
+FROM ACTIVE_PROMOTIONS_VW
+ORDER BY START_DATE;
+```
+
+### Vista: CAFETERIA_REVIEWS_VW
+
+**Descripción:** Esta vista muestra la calificación promedio y el número de reseñas por cafetería.
+
+**Columnas:**
+
+* **CAFETERIA_ID:** ID de la cafetería
+* **NAME:** Nombre de la cafetería
+* **REVIEW_COUNT:** Cantidad de reseñas de la cafetería
+* **AVERAGE_RATING:** Calificación promedio de la cafetería
+
+**Ejemplo de consulta:**
+
+```sql
+SELECT *
+FROM CAFETERIA_REVIEWS_VW
+ORDER BY REVIEW_COUNT DESC;
+```
+
+### Vista: CAFETERIA_MENU_ITEMS_VW
+
+**Descripción:** Esta vista muestra los tipos de café que ofrece cada cafetería.
+
+**Columnas:**
+
+* **CAFETERIA_ID:** ID de la cafetería
+* **NAME:** Nombre de la cafetería
+* **ITEM_ID:** ID del café
+* **ITEM_NAME:** Nombre del café
+* **ITEM_TYPE:** Tipo del café (Tradicional/Especial)
+
+**Ejemplo de consulta:**
+
+```sql
+SELECT *
+FROM CAFETERIA_MENU_ITEMS_VW
+ORDER BY NAME;
+```
+
+## Documentación de Funciones
+
+### Función: TotalConsumptions
+
+**Descripción:** Esta función cuenta las consumiciones por usuario.
+
+**Parámetros:**
+
+* **user_id:** Identificador único de usuario
+
+**Retorno:**
+
+* número total de consumiciones por usuario
+
+**Ejemplo de uso:**
+
+```sql
+SELECT TotalConsumptions(15) AS Total_Consumiciones;
+```
+
+### Función: AverageRating
+
+**Descripción:** Esta función calcula el promedio de puntuaciones de una cafetería.
+
+**Parámetros:**
+
+* **cafeteriaId:** Identificador único de la cafetería
+
+
+**Retorno:**
+
+* Calificación promedio de la cafetería
+
+**Ejemplo de uso:**
+
+```sql
+SELECT AverageRating(2) AS Calificación_Promedio;
+```
+
+### Función: CalculateTotalPaymentsByMethod
+
+**Descripción:** Esta función calcula la suma de pagos por método de pago.
+
+**Parámetros:**
+
+* **method:** método de pago (transferencia o tarjeta)
+
+**Retorno:**
+
+* monto total de pagos por el medio de pago seleccionado
+
+**Ejemplo de uso:**
+
+```sql
+SELECT 
+    'TARJETA' AS PaymentMethod,
+    CalculateTotalPaymentsByMethod('TARJETA') AS TotalPagos
+UNION ALL
+SELECT 
+    'TRANSFERENCIA' AS PaymentMethod,
+    CalculateTotalPaymentsByMethod('TRANSFERENCIA') AS TotalPagos;
+```
+
+## Documentación de Triggers
+
+### Trigger: BeforeCoffeeTypeInsert
+
+**Descripción:** Este trigger verifica si el tipo de café que se intenta crear ya existe en el menú de la cafetería antes de permitir la inserción. Se activa antes de insertar un nuevo tipo de café en la tabla CAFETERIA_MENU.Si el tipo de café ya existe, se registra el intento en una tabla de logs y se lanza un error para evitar la duplicación.
+
+**Detalles:**
+
+* **Tabla afectada:** consumptions
+* **Acción:** INSERT
+* **Información registrada:** Fecha, tipo de café y ID de la cafetería
+
+**Ejemplo:**
+
+* Si el tipo de café ya existe en el menú de la cafetería especificada, se creará una entrada en la tabla TriggerLogs con los siguientes datos:
+     * LogDate: La fecha y hora en el momento del intento de inserción.
+     * Message: Mensaje que indica el intento de insertar un tipo de café que ya existe.
+* Se lanzará un error con el mensaje: 'El tipo de café ya existe en el menú de la cafetería.
+
+### Trigger: AfterConsumptionInsert
+
+**Descripción:** Este trigger registra el intento de superar el límite diario de consumiciones (tradicionales o especiales) para un usuario según el plan que tiene en la tabla "logtable".
+
+**Detalles:**
+
+* **Tabla afectada:** cafeteria_menu
+* **Acción:** INSERT
+* **Información registrada:** Mensaje de alerta, Fecha y hora del registro 
+
+**Ejemplo:**
+
+* Se inserta una nueva consumición para un usuario.
+* El trigger verifica si el usuario ha alcanzado el límite diario de consumiciones para el tipo de café.
+* Si se supera el límite, el trigger registra la acción en la tabla LogTable con un mensaje que indica el usuario, la fecha y el tipo de café alcanzado el límite.
+
+## Documentación de Procedimientos Almacenados
+
+### Procedimiento: GetCafeteriaConsumptionStats
+
+**Descripción:** Este procedimiento obtiene estadísticas de consumo de café en una cafetería específica dentro de un rango de fechas seleccionado.
+
+**Parámetros:**
+
+* **cafeteriaId:** ID de la cafetería para la cual se obtienen las estadísticas.
+* **startDate:** Fecha de inicio del rango para la consulta.
+* **endDate:** Fecha de fin del rango para la consulta.
+
+**Retorno:**
+
+* **totalConsumptions:** Total de consumiciones en la cafetería durante el rango de fechas.
+* **avgDailyConsumptions:** Promedio diario de consumiciones en la cafetería durante el rango de fechas.
+
+**Ejemplo de uso:**
+
+```sql
+ CALL GetCafeteriaConsumptionStats(3, '2024-07-31', '2024-08-02');
+```
+
+### Procedimiento: GetCoffeeTypeConsumptionSummary
+
+**Descripción:** Este procedimiento proporciona un resumen de consumiciones por tipo de café dentro de un rango de fechas dado.
+
+**Parámetros:**
+
+* **startDate:** Fecha de inicio del rango para la consulta.
+* **endDate:** Fecha de fin del rango para la consulta.
+
+**Retorno:**
+
+* **Type:** Tipo del café (tradicional o especial).
+* **TotalConsumptions:** Cantidad total de consumiciones para cada tipo de café dentro del rango de fechas especificado.
+
+**Ejemplo de uso:**
+
+```sql
+CALL GetCoffeeTypeConsumptionSummary('2022-01-01', '2025-08-02'); -- se utiliza fecha futura en el ejemplo de uso porque generé malos datos, se corregirá para la entrega final
+```
+
+## Herramientas y tecnologias usadas
+
+* DBeaver 
+* Mockaroo (para generar datos ficticios para tabla 'users')

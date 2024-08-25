@@ -1,6 +1,3 @@
-
-
-
 # <center>Entrega de Proyecto Final SQL</center>
 
 ### Creación de una base de datos para una aplicación de café al paso
@@ -429,8 +426,30 @@ SELECT
 **Ejemplo de uso:**
 
 ```sql
-CALL GetCoffeeTypeConsumptionSummary('2022-01-01', '2025-08-02'); -- se utiliza fecha futura en el ejemplo de uso porque generé malos datos, se corregirá para la entrega final
+CALL GetCoffeeTypeConsumptionSummary('2022-01-01', '2025-08-02'); 
 ```
+
+## Roles y Usuarios
+
+**Descripción:** Se crearon 3 roles: admin, marketing y finanzas. A continuación se detallan los permisos y usuarios de cada uno de ellos.
+
+### Rol: Admin
+
+* **Accesos a:** todas las tablas y funciones de la base de datos. 
+* **Permisos:** completos. Incluye: SELECT, INSERT, UPDATE, DELETE Y EXECUTE.
+* **Usuario:** admin_user, contraseña: password_admin.
+  
+### Rol: Marketing
+
+* **Accesos a:** las tablas de 'Promotions', 'Reviews', 'Cafeterías' y 'Users'.
+* **Permisos:** SELECT e INSERT para la tabla de 'Promotions'. SELECT en el resto de las tablas mencionadas anteriormente.
+* **Usuario:** marketing_user, contraseña: password_marketing.
+
+### Rol: Finanzas
+
+* **Accesos a:** las tablas de 'Payment_History', 'Subscription', 'Cafeterías' y 'Subscription_plans'.
+* **Permisos:** SELECT e INSERT para la tabla de 'Payment_History'. SELECT en el resto de las tablas mencionadas anteriormente.
+* **Usuario:** finanzas_user, contraseña: password_finanzas. Para este usuario se tiene una seguridad extra de máximo 3 intentos de ingreso, luego de 3 intentos fallidos, el usuario se bloquea por 1 día.
 
 ## Herramientas y tecnologias usadas
 

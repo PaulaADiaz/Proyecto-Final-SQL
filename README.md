@@ -451,11 +451,11 @@ CALL GetCoffeeTypeConsumptionSummary('2022-01-01', '2025-08-02');
 * **Permisos:** SELECT e INSERT para la tabla de 'Payment_History'. SELECT en el resto de las tablas mencionadas anteriormente.
 * **Usuario:** finanzas_user, contraseña: password_finanzas. Para este usuario se tiene una seguridad extra de máximo 3 intentos de ingreso, luego de 3 intentos fallidos, el usuario se bloquea por 1 día.
 
-## Roles y Usuarios
+## Backup de la base de datos
 
 **Descripción:** Se realiza un backup de la base de datos a través de DBeaver. Se adjunta en el repositorio dentro de la carpeta 'backuo' el archivo dump_cafealpaso_25082024.sql con el script completo que incluye tanto la estructura como la data de la BD.
 
-## Herramientas y tecnologias usadas
+## Herramientas y tecnologías usadas
 
 * DBeaver 
 * Mockaroo (para generar datos ficticios para tabla 'users')

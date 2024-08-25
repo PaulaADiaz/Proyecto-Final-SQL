@@ -455,6 +455,12 @@ CALL GetCoffeeTypeConsumptionSummary('2022-01-01', '2025-08-02');
 
 **Descripción:** Se realiza un backup de la base de datos a través de DBeaver. Se adjunta en el repositorio dentro de la carpeta 'backuo' el archivo dump_cafealpaso_25082024.sql con el script completo que incluye tanto la estructura como la data de la BD.
 
+## Cómo correr el código
+
+```bash
+   make
+```
+
 ## Herramientas y tecnologías usadas
 
 * DBeaver 

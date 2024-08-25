@@ -3,7 +3,7 @@ USE CafeAlPaso_DiazPaula;
 INSERT INTO Subscription_Plans (PLAN_ID, PLAN_NAME, PRICE, DAILY_LIMIT_TRAD, DAILY_LIMIT_SPEC)
 VALUES
 (1, 'Básico', 30000.00, 1, 0),
-(2, 'Bronze', 50000.00, 2, 1),
+(2, 'Bronze', 50000.00, 2, 0),
 (3, 'Silver', 70000.00, 2, 1),
 (4, 'Gold', 100000.00, 100, 1),
 (5, 'Diamond', 130000.00, 100, 100);

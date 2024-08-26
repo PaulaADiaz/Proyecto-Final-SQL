@@ -1,0 +1,14 @@
+version: '25082024'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./objects:/objects
+      - ./structure:/structure
+      - "./${BACKUP_DIR}:/${BACKUP_DIR}:rw"
+    ports:
+      - "3306:3306"

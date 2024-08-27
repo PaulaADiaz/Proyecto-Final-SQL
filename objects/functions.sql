@@ -1,3 +1,6 @@
+USE CafeAlPaso_DiazPaula; 
+
+
 -- Función 1: cuenta las consumiciones por usuario.
 
 CREATE FUNCTION TotalConsumptions(userId INT)

@@ -1,3 +1,5 @@
+USE CafeAlPaso_DiazPaula; 
+
 -- Trigger 1: Verifica si el tipo de café que se intenta crear ya existe en el menú de la cafeterías antes de permitir la inserción
 
 CREATE TABLE TriggerLogs (

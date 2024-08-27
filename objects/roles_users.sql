@@ -1,3 +1,5 @@
+USE CafeAlPaso_DiazPaula; 
+
 CREATE ROLE admin;
 CREATE ROLE marketing;
 CREATE ROLE finanzas;

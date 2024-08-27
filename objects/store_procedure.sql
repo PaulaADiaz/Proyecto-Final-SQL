@@ -1,3 +1,5 @@
+USE CafeAlPaso_DiazPaula; 
+
 -- Procedimiento 1: obtiene estadísticas de consumo de café en una cafetería específica dentro de un rango de fechas seleccionado.
 
 CREATE PROCEDURE GetCafeteriaConsumptionStats(

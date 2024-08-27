@@ -9,6 +9,7 @@ services:
     volumes:
       - ./objects:/objects
       - ./structure:/structure
-      - "./${BACKUP_DIR}:/${BACKUP_DIR}:rw"
+      - ./structure/DATAUSERS.csv:/DATAUSERS.csv
+      - ./${BACKUP_DIR}:/${BACKUP_DIR}
     ports:
       - "3306:3306"

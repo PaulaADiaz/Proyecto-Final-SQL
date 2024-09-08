@@ -1,4 +1,4 @@
--- Trigger 1: Verifica si el tipo de café que se intenta crear ya existe en el menú de la cafeterías antes de permitir la inserción
+-- Trigger 1: Verifica si el tipo de cafe que se intenta crear ya existe en el menu de la cafeterias antes de permitir la insercion
 
 DELIMITER //
 
@@ -16,20 +16,20 @@ BEGIN
     
     SELECT ITEM_NAME INTO coffeeTypeName
     FROM MENU_ITEMS
-    WHERE ITEM_ID = NEW.ITEM_ID; -- Obtiene el nombre del tipo de café que se intenta insertar
+    WHERE ITEM_ID = NEW.ITEM_ID; -- Obtiene el nombre del tipo de cafe que se intenta insertar
     
     SELECT COUNT(*) INTO coffeeTypeExists
     FROM CAFETERIA_MENU cm
     JOIN MENU_ITEMS mi ON cm.ITEM_ID = mi.ITEM_ID
     WHERE cm.CAFETERIA_ID = NEW.CAFETERIA_ID
-      AND mi.ITEM_NAME = coffeeTypeName; -- Verifica si el tipo de café ya existe en la cafetería
+      AND mi.ITEM_NAME = coffeeTypeName; -- Verifica si el tipo de cafe ya existe en la cafeteria
 
     IF coffeeTypeExists > 0 THEN
         INSERT INTO TriggerLogs (Message) 
-        VALUES (CONCAT('Intento de insertar el tipo de café "', coffeeTypeName, '" que ya existe en el menú de la cafetería con ID ', NEW.CAFETERIA_ID, '.')); -- Si ya existe, se registra en la tabla de logs y lanza un error
+        VALUES (CONCAT('Intento de insertar el tipo de cafe "', coffeeTypeName, '" que ya existe en el menu de la cafeteria con ID ', NEW.CAFETERIA_ID, '.')); -- Si ya existe, se registra en la tabla de logs y lanza un error
 
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'El tipo de café ya existe en el menú de la cafetería.'; -- Lanza el error con un mensaje fijo
+        SET MESSAGE_TEXT = 'El tipo de cafe ya existe en el menu de la cafeteria.'; -- Lanza el error con un mensaje fijo
     END IF;
 END //
 DELIMITER ;
@@ -39,7 +39,7 @@ DELIMITER ;
 INSERT INTO CAFETERIA_MENU (CAFETERIA_ID, ITEM_ID)
 VALUES (1, 1);  
 
--- Trigger 2: Verifica el límite de consumos diarios para el usuario según el plan de suscripción
+-- Trigger 2: Verifica el limite de consumos diarios para el usuario segun el plan de suscripcion
 
 DELIMITER //
 
@@ -49,7 +49,7 @@ CREATE TABLE LogTable (
     LOG_DATE DATETIME);
 
 CREATE TRIGGER AfterConsumptionInsert
-AFTER INSERT ON Consumptions
+AFTER INSERT ON CONSUMPTIONS
 FOR EACH ROW
 BEGIN
     DECLARE dailyLimitTrad INT DEFAULT 0;
@@ -65,26 +65,26 @@ BEGIN
     WHERE u.USER_ID = NEW.USER_ID;
 
     SELECT COUNT(*) INTO consumptionCountTrad -- cuenta consumiciones tradicionales
-    FROM Consumptions
+    FROM CONSUMPTIONS
     WHERE USER_ID = NEW.USER_ID
       AND DATE(NEW.DATE) = DATE(DATE)
       AND TYPE = 'tradicional';
 
     SELECT COUNT(*) INTO consumptionCountSpec -- cuenta consumiciones especiales
-    FROM Consumptions
+    FROM CONSUMPTIONS
     WHERE USER_ID = NEW.USER_ID
       AND DATE(NEW.DATE) = DATE(DATE)
       AND TYPE = 'especial';
 
     IF consumptionCountTrad > dailyLimitTrad THEN
         INSERT INTO LogTable (MESSAGE, LOG_DATE)
-        VALUES (CONCAT('Límite diario de consumiciones tradicionales alcanzado para el usuario ', NEW.USER_ID, ' en la fecha ', NEW.DATE), NOW());
-    END IF; -- Verifica si supera el límite de consumiciones tradicionales
+        VALUES (CONCAT('Limite diario de consumiciones tradicionales alcanzado para el usuario ', NEW.USER_ID, ' en la fecha ', NEW.DATE), NOW());
+    END IF; -- Verifica si supera el limite de consumiciones tradicionales
 
     IF consumptionCountSpec > dailyLimitSpec THEN
         INSERT INTO LogTable (MESSAGE, LOG_DATE)
-        VALUES (CONCAT('Límite diario de consumiciones especiales alcanzado para el usuario ', NEW.USER_ID, ' en la fecha ', NEW.DATE), NOW());
-    END IF; -- Verifica si supera el límite de consumiciones especiales
+        VALUES (CONCAT('Limite diario de consumiciones especiales alcanzado para el usuario ', NEW.USER_ID, ' en la fecha ', NEW.DATE), NOW());
+    END IF; -- Verifica si supera el limite de consumiciones especiales
 
 END //
 DELIMITER ;
@@ -93,5 +93,5 @@ DELIMITER ;
 -- Ejemplo de uso
 
 
-INSERT INTO Consumptions (USER_ID, CAFETERIA_ID, SUBSCRIPTION_ID, DATE, TYPE)
+INSERT INTO CONSUMPTIONS (USER_ID, CAFETERIA_ID, SUBSCRIPTION_ID, DATE, TYPE)
 VALUES (25, 3, 10, '2024-07-31', 'especial');

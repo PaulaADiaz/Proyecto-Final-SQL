@@ -359,7 +359,7 @@ SELECT
 
 **Detalles:**
 
-* **Tabla afectada:** consumptions
+* **Tabla afectada:** CONSUMPTIONS
 * **Acción:** INSERT
 * **Información registrada:** Fecha, tipo de café y ID de la cafetería
 
@@ -376,7 +376,7 @@ SELECT
 
 **Detalles:**
 
-* **Tabla afectada:** cafeteria_menu
+* **Tabla afectada:** CAFETERIA_MENU
 * **Acción:** INSERT
 * **Información registrada:** Mensaje de alerta, Fecha y hora del registro 
 

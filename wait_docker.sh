@@ -1,8 +1,18 @@
 #!/bin/bash
 
-until docker compose logs mysql | grep "/usr/sbin/mysqld: ready for connections."; do 
-    echo -n .; 
-    sleep 1;
+# Source the .env file
+if [ -f .env ]; then
+    export $(grep -v '^#' .env | xargs)
+else
+    echo ".env file not found"
+    exit 1
+fi
+
+# Wait until MySQL is ready
+until docker exec -it mysql mysql -u"$MYSQL_USER" -p"$MYSQL_ROOT_PASSWORD" -e "\q"
+do
+    echo "Waiting for MySQL to be ready..."
+    sleep 2
 done
 
-sleep 10
+echo "MySQL is ready."

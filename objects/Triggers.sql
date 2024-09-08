@@ -1,5 +1,7 @@
 -- Trigger 1: Verifica si el tipo de café que se intenta crear ya existe en el menú de la cafeterías antes de permitir la inserción
 
+DELIMITER //
+
 CREATE TABLE TriggerLogs (
     LogID INT AUTO_INCREMENT PRIMARY KEY,
     LogDate DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -29,7 +31,8 @@ BEGIN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'El tipo de café ya existe en el menú de la cafetería.'; -- Lanza el error con un mensaje fijo
     END IF;
-END ;
+END //
+DELIMITER ;
 
 -- Ejemplo de uso
 
@@ -37,7 +40,9 @@ INSERT INTO CAFETERIA_MENU (CAFETERIA_ID, ITEM_ID)
 VALUES (1, 1);  
 
 -- Trigger 2: Verifica el límite de consumos diarios para el usuario según el plan de suscripción
-   
+
+DELIMITER //
+
 CREATE TABLE LogTable (
     LOG_ID INT AUTO_INCREMENT PRIMARY KEY,
     MESSAGE TEXT,
@@ -81,7 +86,9 @@ BEGIN
         VALUES (CONCAT('Límite diario de consumiciones especiales alcanzado para el usuario ', NEW.USER_ID, ' en la fecha ', NEW.DATE), NOW());
     END IF; -- Verifica si supera el límite de consumiciones especiales
 
-END;
+END //
+DELIMITER ;
+
 
 -- Ejemplo de uso
 

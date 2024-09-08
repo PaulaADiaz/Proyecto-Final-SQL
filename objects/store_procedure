@@ -1,5 +1,7 @@
 -- Procedimiento 1: obtiene estadísticas de consumo de café en una cafetería específica dentro de un rango de fechas seleccionado.
 
+DELIMITER //
+
 CREATE PROCEDURE GetCafeteriaConsumptionStats(
     IN cafId INT,
     IN startDate DATE,
@@ -25,10 +27,13 @@ BEGIN
 
     -- Devolver los resultados
     SELECT totalConsumptions, avgDailyConsumptions;
-END;
+END //
+DELIMITER ;
 
 
 -- Procedimiento 2: proporciona un resumen de consumiciones por tipo de café dentro de un rango de fechas dado.
+
+DELIMITER //
 
 CREATE PROCEDURE GetCoffeeTypeConsumptionSummary(
     IN startDate DATE,
@@ -41,4 +46,5 @@ BEGIN
     FROM Consumptions
     WHERE DATE BETWEEN startDate AND endDate
     GROUP BY TYPE;
-END;
+END //
+DELIMITER ;

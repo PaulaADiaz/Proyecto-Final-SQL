@@ -15,7 +15,7 @@ DATABASE_CREATION=./structure/CafeAlPaso_DiazPaula.sql
 DATABASE_POPULATION=./structure/population.sql
 
 
-FILES = Views functions stored_procedures Triggers roles_users
+FILES=views functions stored_procedures triggers roles_users
 
 .PHONY: all up objects test-db access-db down
 

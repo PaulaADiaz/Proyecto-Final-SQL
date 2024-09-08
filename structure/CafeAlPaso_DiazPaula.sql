@@ -18,16 +18,16 @@ CREATE TABLE USERS (
     ADDRESS VARCHAR(100),
     BIRTHDAY_DATE DATE,
     SIGN_UP_DATE DATETIME DEFAULT (CURRENT_DATE)
-)COMMENT 'Almacena la información de los usuarios';
+)COMMENT 'Almacena la informacion de los usuarios';
 
 -- SUBSCRIPTION_PLANS
 CREATE TABLE SUBSCRIPTION_PLANS (
     PLAN_ID INT PRIMARY KEY AUTO_INCREMENT,
     PLAN_NAME VARCHAR(50) UNIQUE NOT NULL,
     PRICE DECIMAL(10,2),
-    DAILY_LIMIT_TRAD INT, -- NÚMERO DE CONSUMICIONES TRADICIONALES LÍMITE POR DÍA
-    DAILY_LIMIT_SPEC INT -- NÚMERO DE CONSUMICIONES ESPECIALES LÍMITE POR DÍA
-)COMMENT 'Almacena la información de los diferentes planes de suscripción';
+    DAILY_LIMIT_TRAD INT, -- NUMERO DE CONSUMICIONES TRADICIONALES LIMITE POR DIA
+    DAILY_LIMIT_SPEC INT -- NUMERO DE CONSUMICIONES ESPECIALES LIMITE POR DIA
+)COMMENT 'Almacena la informacion de los diferentes planes de suscripcion';
 
 -- SUBSCRIPTION
 CREATE TABLE SUBSCRIPTION (
@@ -39,7 +39,7 @@ CREATE TABLE SUBSCRIPTION (
     STATUS VARCHAR(20), -- ACTIVO/INACTIVO
     FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
     FOREIGN KEY (PLAN_ID) REFERENCES SUBSCRIPTION_PLANS(PLAN_ID)
-)COMMENT 'Almacena la información de las suscrpicones para los usuarios';
+)COMMENT 'Almacena la informacion de las suscrpicones para los usuarios';
 
 -- CAFETERIAS
 CREATE TABLE CAFETERIAS (
@@ -47,10 +47,10 @@ CREATE TABLE CAFETERIAS (
     NAME VARCHAR(100) NOT NULL,
     ADDRESS VARCHAR(100) NOT NULL, 
     PHONE VARCHAR(25) NOT NULL,
-    EMAIL VARCHAR(100) NOT NULL, -- no es unique porque diferentes sucursales de una misma cadena de cafeterías pueden compartir misma casilla de mail
+    EMAIL VARCHAR(100) NOT NULL, -- no es unique porque diferentes sucursales de una misma cadena de cafeterias pueden compartir misma casilla de mail
     OPENING_HOURS VARCHAR(50),
     CLOSING_HOURS VARCHAR(50)
-)COMMENT 'Almacena la información de las cafeterias';
+)COMMENT 'Almacena la informacion de las cafeterias';
 
 -- CONSUMPTIONS
 CREATE TABLE CONSUMPTIONS (
@@ -63,7 +63,7 @@ CREATE TABLE CONSUMPTIONS (
     FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
     FOREIGN KEY (CAFETERIA_ID) REFERENCES CAFETERIAS(CAFETERIA_ID),
     FOREIGN KEY (SUBSCRIPTION_ID) REFERENCES SUBSCRIPTION(SUBSCRIPTION_ID)
-)COMMENT 'Almacena información de las consumiciones de los usuarios';
+)COMMENT 'Almacena informacion de las consumiciones de los usuarios';
 
 -- PAYMENT_HISTORY
 CREATE TABLE PAYMENT_HISTORY (
@@ -75,14 +75,14 @@ CREATE TABLE PAYMENT_HISTORY (
     PAYMENT_METHOD VARCHAR(30), -- TARJETA/TRANSFERENCIA
     FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
     FOREIGN KEY (SUBSCRIPTION_ID) REFERENCES SUBSCRIPTION(SUBSCRIPTION_ID)
-)COMMENT 'Almacena la información de los pagos de las suscripciones';
+)COMMENT 'Almacena la informacion de los pagos de las suscripciones';
 
 -- MENU_ITEMS
 CREATE TABLE MENU_ITEMS (
     ITEM_ID INT PRIMARY KEY AUTO_INCREMENT,
     ITEM_NAME VARCHAR(100),
     ITEM_TYPE VARCHAR(15) -- TRADICIONAL/ESPECIAL
-)COMMENT 'Almacena la información de los distintos cafés';
+)COMMENT 'Almacena la informacion de los distintos cafes';
 
 -- CAFETERIA_MENU
 CREATE TABLE CAFETERIA_MENU (
@@ -91,7 +91,7 @@ CREATE TABLE CAFETERIA_MENU (
     PRIMARY KEY (CAFETERIA_ID, ITEM_ID),
     FOREIGN KEY (CAFETERIA_ID) REFERENCES CAFETERIAS(CAFETERIA_ID),
     FOREIGN KEY (ITEM_ID) REFERENCES MENU_ITEMS(ITEM_ID)
-)COMMENT 'Almacena la información de la variedad de items por cafetería';
+)COMMENT 'Almacena la informacion de la variedad de items por cafeteria';
 
 -- PROMOTIONS
 CREATE TABLE PROMOTIONS (
@@ -105,7 +105,7 @@ CREATE TABLE PROMOTIONS (
     PLAN_ID INT,
     FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
     FOREIGN KEY (PLAN_ID) REFERENCES SUBSCRIPTION_PLANS(PLAN_ID)
-)COMMENT 'Almacena la información de promociones para suscripciones';
+)COMMENT 'Almacena la informacion de promociones para suscripciones';
 
 -- REVIEWS
 CREATE TABLE REVIEWS (
@@ -117,4 +117,4 @@ CREATE TABLE REVIEWS (
     REVIEW_DATE DATE,
     FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
     FOREIGN KEY (CAFETERIA_ID) REFERENCES CAFETERIAS(CAFETERIA_ID)
-)COMMENT 'Almacena la información de las reseñas de los usuarios en diversas cafeterias';
+)COMMENT 'Almacena la informacion de las reseñas de los usuarios en diversas cafeterias';

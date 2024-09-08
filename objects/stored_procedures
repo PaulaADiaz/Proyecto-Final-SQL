@@ -1,4 +1,4 @@
--- Procedimiento 1: obtiene estadísticas de consumo de café en una cafetería específica dentro de un rango de fechas seleccionado.
+-- Procedimiento 1: obtiene estadisticas de consumo de cafe en una cafeteria especifica dentro de un rango de fechas seleccionado.
 
 DELIMITER //
 
@@ -13,14 +13,14 @@ BEGIN
 
     -- Calcular el total de consumiciones
     SELECT COUNT(*) INTO totalConsumptions
-    FROM Consumptions
+    FROM CONSUMPTIONS
     WHERE CAFETERIA_ID = cafId
       AND DATE BETWEEN startDate AND endDate;
 
     -- Calcular el promedio diario de consumiciones
     SELECT IFNULL(
         (SELECT COUNT(*) / DATEDIFF(endDate, startDate) + 1
-         FROM Consumptions
+         FROM CONSUMPTIONS
          WHERE CAFETERIA_ID = cafId
            AND DATE BETWEEN startDate AND endDate), 0
     ) INTO avgDailyConsumptions;
@@ -31,7 +31,7 @@ END //
 DELIMITER ;
 
 
--- Procedimiento 2: proporciona un resumen de consumiciones por tipo de café dentro de un rango de fechas dado.
+-- Procedimiento 2: proporciona un resumen de consumiciones por tipo de cafe dentro de un rango de fechas dado.
 
 DELIMITER //
 
@@ -43,7 +43,7 @@ BEGIN
     SELECT 
         TYPE, 
         COUNT(*) AS Total_Consumptions
-    FROM Consumptions
+    FROM CONSUMPTIONS
     WHERE DATE BETWEEN startDate AND endDate
     GROUP BY TYPE;
 END //

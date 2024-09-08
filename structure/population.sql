@@ -1,12 +1,53 @@
 USE CafeAlPaso_DiazPaula;
 
-INSERT INTO Subscription_Plans (PLAN_ID, PLAN_NAME, PRICE, DAILY_LIMIT_TRAD, DAILY_LIMIT_SPEC)
+INSERT INTO SUBSCRIPTION_PLANS (PLAN_ID, PLAN_NAME, PRICE, DAILY_LIMIT_TRAD, DAILY_LIMIT_SPEC)
 VALUES
 (1, 'Basico', 30000.00, 1, 0),
 (2, 'Bronze', 50000.00, 2, 0),
 (3, 'Silver', 70000.00, 2, 1),
 (4, 'Gold', 100000.00, 100, 1),
 (5, 'Diamond', 130000.00, 100, 100);
+
+INSERT INTO CAFETERIAS (CAFETERIA_ID, NAME, ADDRESS, PHONE, EMAIL, OPENING_HOURS, CLOSING_HOURS)
+VALUES
+(1, 'Cafe Martinez', 'Calle Güemes 2551', '223-495-1234', 'martinez@example.com', '08:00', '20:00'),
+(2, 'Cafe Boston', 'Av. Colon 1902', '223-494-5678', 'boston@example.com', '07:00', '20:00'),
+(3, 'La Fonte D\'Oro', 'Calle San Martin 2444', '223-493-9876', 'lafontedoro@example.com', '07:00', '22:00'),
+(4, 'Cafe Havanna', 'Av. Juan B. Justo 1367', '223-491-2468', 'havanna@example.com', '09:00', '21:00'),
+(5, 'Cafe Cabrales', 'Calle Rivadavia 3108', '223-492-7890', 'cabrales@example.com', '08:00', '19:00'),
+(6, 'Cafe Antares', 'Calle Cordoba 3025', '223-496-1234', 'antares@example.com', '10:00', '24:00'),
+(7, 'Cafe La Vereda', 'Av. Independencia 1784', '223-495-5678', 'lavereda@example.com', '07:30', '20:30'),
+(8, 'Cafe Oliva', 'Calle Alem 3440', '223-493-9876', 'oliva@example.com', '09:30', '21:30'),
+(9, 'Cafe Soriano', 'Calle San Juan 2112', '223-491-2468', 'soriano@example.com', '09:00', '21:00'),
+(10, 'Cafe Pueyrredon', 'Av. Pueyrredon 2901', '223-492-7890', 'pueyrredon@example.com', '08:00', '20:00'),
+(11, 'Cafe Montesco', 'Calle Alberti 1565', '223-496-1357', 'montesco@example.com', '08:00', '20:00'),
+(12, 'Cafe Boulevard', 'Calle Güemes 3456', '223-497-2468', 'boulevard@example.com', '07:00', '20:00'),
+(13, 'Cafe Argentino', 'Av. Libertad 890', '223-493-1357', 'argentino@example.com', '08:00', '21:00'),
+(14, 'Cafe Paris', 'Calle Moreno 2121', '223-495-5678', 'paris@example.com', '08:00', '22:00'),
+(15, 'Cafe Horizonte', 'Calle Santiago del Estero 3456', '223-496-7890', 'horizonte@example.com', '09:00', '21:00'),
+(16, 'Cafe Rincon', 'Av. Constitucion 1234', '223-497-5678', 'rincon@example.com', '10:00', '18:00'),
+(17, 'Cafe Nueva Era', 'Calle Mitre 4567', '223-495-1357', 'nuevaera@example.com', '11:00', '21:00'),
+(18, 'Cafe Del Mar', 'Av. Peralta Ramos 1111', '223-496-7890', 'delmar@example.com', '08:00', '20:00'),
+(19, 'Cafe Plaza', 'Calle La Rioja 5678', '223-497-2468', 'plaza@example.com', '07:00', '20:00'),
+(20, 'Cafe Italiano', 'Av. Luro 3456', '223-495-1357', 'italiano@example.com', '08:00', '22:00');
+
+INSERT INTO MENU_ITEMS (ITEM_NAME, ITEM_TYPE)
+VALUES
+('Espresso', 'TRADICIONAL'),
+('Americano', 'TRADICIONAL'),
+('Cappuccino', 'TRADICIONAL'),
+('Latte', 'TRADICIONAL'),
+('Mocha', 'TRADICIONAL'),
+('Macchiato', 'TRADICIONAL'),
+('Flat White', 'TRADICIONAL'),
+('Affogato', 'TRADICIONAL'),
+('Cold Brew', 'TRADICIONAL'),
+('Nitro Coffee', 'ESPECIAL'),
+('Caramel Macchiato', 'ESPECIAL'),
+('Vanilla Latte', 'ESPECIAL'),
+('Matcha Latte', 'ESPECIAL'),
+('Irish Coffee', 'ESPECIAL'),
+('Turkish Coffee', 'ESPECIAL');
 
 INSERT INTO SUBSCRIPTION (SUBSCRIPTION_ID, USER_ID, PLAN_ID, START_DATE, END_DATE, STATUS)
 VALUES
@@ -36,31 +77,31 @@ VALUES
 (24, 159, 4, '2023-03-25', '2023-04-24', 'inactive'),
 (25, 482, 1, '2022-07-31', '2022-08-30', 'inactive');
 
-INSERT INTO Cafeterias (CAFETERIA_ID, NAME, ADDRESS, PHONE, EMAIL, OPENING_HOURS, CLOSING_HOURS)
+  
+INSERT INTO CAFETERIA_MENU (CAFETERIA_ID, ITEM_ID)
 VALUES
-(1, 'Cafe Martinez', 'Calle Güemes 2551', '223-495-1234', 'martinez@example.com', '08:00', '20:00'),
-(2, 'Cafe Boston', 'Av. Colon 1902', '223-494-5678', 'boston@example.com', '07:00', '20:00'),
-(3, 'La Fonte D\'Oro', 'Calle San Martin 2444', '223-493-9876', 'lafontedoro@example.com', '07:00', '22:00'),
-(4, 'Cafe Havanna', 'Av. Juan B. Justo 1367', '223-491-2468', 'havanna@example.com', '09:00', '21:00'),
-(5, 'Cafe Cabrales', 'Calle Rivadavia 3108', '223-492-7890', 'cabrales@example.com', '08:00', '19:00'),
-(6, 'Cafe Antares', 'Calle Cordoba 3025', '223-496-1234', 'antares@example.com', '10:00', '24:00'),
-(7, 'Cafe La Vereda', 'Av. Independencia 1784', '223-495-5678', 'lavereda@example.com', '07:30', '20:30'),
-(8, 'Cafe Oliva', 'Calle Alem 3440', '223-493-9876', 'oliva@example.com', '09:30', '21:30'),
-(9, 'Cafe Soriano', 'Calle San Juan 2112', '223-491-2468', 'soriano@example.com', '09:00', '21:00'),
-(10, 'Cafe Pueyrredon', 'Av. Pueyrredon 2901', '223-492-7890', 'pueyrredon@example.com', '08:00', '20:00'),
-(11, 'Cafe Montesco', 'Calle Alberti 1565', '223-496-1357', 'montesco@example.com', '08:00', '20:00'),
-(12, 'Cafe Boulevard', 'Calle Güemes 3456', '223-497-2468', 'boulevard@example.com', '07:00', '20:00'),
-(13, 'Cafe Argentino', 'Av. Libertad 890', '223-493-1357', 'argentino@example.com', '08:00', '21:00'),
-(14, 'Cafe Paris', 'Calle Moreno 2121', '223-495-5678', 'paris@example.com', '08:00', '22:00'),
-(15, 'Cafe Horizonte', 'Calle Santiago del Estero 3456', '223-496-7890', 'horizonte@example.com', '09:00', '21:00'),
-(16, 'Cafe Rincon', 'Av. Constitucion 1234', '223-497-5678', 'rincon@example.com', '10:00', '18:00'),
-(17, 'Cafe Nueva Era', 'Calle Mitre 4567', '223-495-1357', 'nuevaera@example.com', '11:00', '21:00'),
-(18, 'Cafe Del Mar', 'Av. Peralta Ramos 1111', '223-496-7890', 'delmar@example.com', '08:00', '20:00'),
-(19, 'Cafe Plaza', 'Calle La Rioja 5678', '223-497-2468', 'plaza@example.com', '07:00', '20:00'),
-(20, 'Cafe Italiano', 'Av. Luro 3456', '223-495-1357', 'italiano@example.com', '08:00', '22:00');
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7),
+(2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 8), (2, 9),
+(3, 3), (3, 4), (3, 5), (3, 7), (3, 8), (3, 10), (3, 11),
+(4, 4), (4, 5), (4, 6), (4, 9), (4, 10), (4, 12), (4, 13),
+(5, 5), (5, 6), (5, 7), (5, 11), (5, 12), (5, 14), (5, 15),
+(6, 6), (6, 7), (6, 8), (6, 12), (6, 13), (6, 14), (6, 15),
+(7, 7), (7, 8), (7, 9), (7, 13), (7, 14), (7, 15), (7, 1),
+(8, 8), (8, 9), (8, 10), (8, 11), (8, 13), (8, 14), (8, 2),
+(9, 9), (9, 10), (9, 11), (9, 12), (9, 14), (9, 15), (9, 3),
+(10, 10), (10, 11), (10, 12), (10, 13), (10, 15), (10, 1), (10, 4),
+(11, 11), (11, 12), (11, 13), (11, 14), (11, 2), (11, 3), (11, 5),
+(12, 12), (12, 13), (12, 14), (12, 15), (12, 1), (12, 6), (12, 7),
+(13, 13), (13, 14), (13, 15), (13, 2), (13, 4), (13, 8), (13, 10),
+(14, 14), (14, 15), (14, 3), (14, 5), (14, 7), (14, 9), (14, 11),
+(15, 15), (15, 1), (15, 2), (15, 4), (15, 6), (15, 8), (15, 10),
+(16, 1), (16, 3), (16, 5), (16, 7), (16, 9), (16, 11), (16, 13),
+(17, 2), (17, 4), (17, 6), (17, 8), (17, 10), (17, 12), (17, 14),
+(18, 3), (18, 5), (18, 7), (18, 9), (18, 11), (18, 13), (18, 15),
+(19, 4), (19, 6), (19, 8), (19, 10), (19, 12), (19, 14), (19, 1),
+(20, 5), (20, 7), (20, 9), (20, 11), (20, 13), (20, 15), (20, 2);
 
-
-INSERT INTO Consumptions (CONSUMPTION_ID, USER_ID, CAFETERIA_ID, SUBSCRIPTION_ID, DATE, TYPE)
+INSERT INTO CONSUMPTIONS (CONSUMPTION_ID, USER_ID, CAFETERIA_ID, SUBSCRIPTION_ID, DATE, TYPE)
 VALUES
 (1, 15, 3, 10, '2023-08-12', 'tradicional'),
 (2, 15, 7, 10, '2023-09-05', 'especial'),
@@ -120,47 +161,6 @@ VALUES
 (336, 3, 70000, '2025-04-07 12:05:00', 'TARJETA'),
 (347, 4, 100000, '2025-05-01 13:50:00', 'TRANSFERENCIA');
 
-INSERT INTO MENU_ITEMS (ITEM_NAME, ITEM_TYPE)
-VALUES
-('Espresso', 'TRADICIONAL'),
-('Americano', 'TRADICIONAL'),
-('Cappuccino', 'TRADICIONAL'),
-('Latte', 'TRADICIONAL'),
-('Mocha', 'TRADICIONAL'),
-('Macchiato', 'TRADICIONAL'),
-('Flat White', 'TRADICIONAL'),
-('Affogato', 'TRADICIONAL'),
-('Cold Brew', 'TRADICIONAL'),
-('Nitro Coffee', 'ESPECIAL'),
-('Caramel Macchiato', 'ESPECIAL'),
-('Vanilla Latte', 'ESPECIAL'),
-('Matcha Latte', 'ESPECIAL'),
-('Irish Coffee', 'ESPECIAL'),
-('Turkish Coffee', 'ESPECIAL');
-
--- Insertar variedades de café variadas para cada cafetería
-INSERT INTO CAFETERIA_MENU (CAFETERIA_ID, ITEM_ID)
-VALUES
-(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7),
-(2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 8), (2, 9),
-(3, 3), (3, 4), (3, 5), (3, 7), (3, 8), (3, 10), (3, 11),
-(4, 4), (4, 5), (4, 6), (4, 9), (4, 10), (4, 12), (4, 13),
-(5, 5), (5, 6), (5, 7), (5, 11), (5, 12), (5, 14), (5, 15),
-(6, 6), (6, 7), (6, 8), (6, 12), (6, 13), (6, 14), (6, 15),
-(7, 7), (7, 8), (7, 9), (7, 13), (7, 14), (7, 15), (7, 1),
-(8, 8), (8, 9), (8, 10), (8, 11), (8, 13), (8, 14), (8, 2),
-(9, 9), (9, 10), (9, 11), (9, 12), (9, 14), (9, 15), (9, 3),
-(10, 10), (10, 11), (10, 12), (10, 13), (10, 15), (10, 1), (10, 4),
-(11, 11), (11, 12), (11, 13), (11, 14), (11, 2), (11, 3), (11, 5),
-(12, 12), (12, 13), (12, 14), (12, 15), (12, 1), (12, 6), (12, 7),
-(13, 13), (13, 14), (13, 15), (13, 2), (13, 4), (13, 8), (13, 10),
-(14, 14), (14, 15), (14, 3), (14, 5), (14, 7), (14, 9), (14, 11),
-(15, 15), (15, 1), (15, 2), (15, 4), (15, 6), (15, 8), (15, 10),
-(16, 1), (16, 3), (16, 5), (16, 7), (16, 9), (16, 11), (16, 13),
-(17, 2), (17, 4), (17, 6), (17, 8), (17, 10), (17, 12), (17, 14),
-(18, 3), (18, 5), (18, 7), (18, 9), (18, 11), (18, 13), (18, 15),
-(19, 4), (19, 6), (19, 8), (19, 10), (19, 12), (19, 14), (19, 1),
-(20, 5), (20, 7), (20, 9), (20, 11), (20, 13), (20, 15), (20, 2);
 
 INSERT INTO PROMOTIONS (PROMOTION_NAME, DISCOUNT, START_DATE, END_DATE, APPLICABLE_TO_ALL, USER_ID, PLAN_ID)
 VALUES

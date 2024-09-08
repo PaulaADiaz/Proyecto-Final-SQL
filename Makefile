@@ -6,18 +6,18 @@ SERVICE_NAME=mysql
 HOST=127.0.0.1
 PORT=3306
 
-PASSWORD=${ROOT_PASSWORD}
-DATABASE=${CafeAlPaso_DiazPaula}
-BACKUP_DIR_FILES=${BACKUP_DIR}
+PASSWORD=${MYSQL_ROOT_PASSWORD}
+DATABASE=${MYSQL_DATABASE}
+USER=${MYSQL_USER}
 
 DOCKER_COMPOSE_FILE=./docker-compose.yml
-DATABASE_CREATION=./structure/database_structure.sql
+DATABASE_CREATION=./structure/CafeAlPaso_DiazPaula.sql
 DATABASE_POPULATION=./structure/population.sql
-CURDATE=$(shell date --iso=seconds)
 
-FILES = vistas funciones stored_procedures triggers
 
-.PHONY: all up objects clean
+FILES = Views functions store_procedure Triggers roles_users
+
+.PHONY: all up objects test-db access-db down
 
 all: info up objects
 
@@ -41,7 +41,7 @@ objects:
 	@echo "Create objects in database"
 	@for file in $(FILES); do \
 	    echo "Process $$file and add to the database: $(DATABASE_NAME)"; \
-	docker exec -it $(SERVICE_NAME)  mysql -u root -p$(PASSWORD) -e "source $$file"; \
+	docker exec -it $(SERVICE_NAME)  mysql -u$(MYSQL_USER) -p$(PASSWORD) -e "source ./sql_project/database_objects/$$file.sql"; \
 	done
 
 test-db:
@@ -55,12 +55,12 @@ test-db:
 
 access-db:
 	@echo "Access to db-client"
-	docker exec -it $(SERVICE_NAME) mysql -u root -p$(PASSWORD) 
+	docker exec -it $(SERVICE_NAME) mysql -u$(MYSQL_USER) -p$(PASSWORD) 
 
 backup-db:
 	@echo "Back up database by structure and data"
 	# Dump MySQL database to a file
-	docker exec -it $(SERVICE_NAME) mysqldump -u root -p$(PASSWORD) $(DATABASE) > ./$(BACKUP_DIR_FILES)/$(DATABASE)-$(CURDATE).sql
+	docker exec -it $(SERVICE_NAME) mysqldump -u root -p$(PASSWORD) $(DATABASE) > ./backup/$(DATABASE)-$$(date +'%Y-%m-%d').
 
 clean-db:
 	@echo "Remove the Database"

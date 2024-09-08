@@ -1,7 +1,7 @@
 USE CafeAlPaso_DiazPaula;
 
--- Vista para el consumo de café de los usuarios
--- Esta vista muestra el consumo total de café por usuario y el plan que tiene
+-- Vista para el consumo de cafe de los usuarios
+-- Esta vista muestra el consumo total de cafe por usuario y el plan que tiene
 CREATE VIEW USER_CONSUMPTION_SUMMARY_VW AS
 SELECT
     u.USER_ID,
@@ -28,8 +28,8 @@ SELECT
 FROM PROMOTIONS p
 WHERE p.START_DATE <= NOW() AND p.END_DATE >= NOW();
 
--- Vista para el ranking de las cafeterías según reseñas
--- Esta vista muestra la calificación promedio y el número de reseñas por cafetería
+-- Vista para el ranking de las cafeterias segun reseñas
+-- Esta vista muestra la calificacion promedio y el numero de reseñas por cafeteria
 CREATE VIEW CAFETERIA_REVIEWS_VW AS
 SELECT
     r.CAFETERIA_ID,
@@ -40,8 +40,8 @@ FROM REVIEWS r
 JOIN CAFETERIAS caf ON r.CAFETERIA_ID = caf.CAFETERIA_ID
 GROUP BY r.CAFETERIA_ID;
 
--- Vista para el menú de café por cafetería
--- Esta vista muestra los tipos de café que ofrece cada cafetería
+-- Vista para el menu de cafe por cafeteria
+-- Esta vista muestra los tipos de cafe que ofrece cada cafeteria
 CREATE VIEW CAFETERIA_MENU_ITEMS_VW AS
 SELECT
     caf.CAFETERIA_ID,

@@ -7,8 +7,9 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
+    # - ./mysql:/var/lib/mysql
       - ./objects:/objects
       - ./structure:/structure
-      - "./${BACKUP_DIR}:/${BACKUP_DIR}:rw"
+      - ./backup:/backup
     ports:
       - "3306:3306"

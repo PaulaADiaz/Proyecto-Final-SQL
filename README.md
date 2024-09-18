@@ -63,9 +63,9 @@ Oportunidad de promover promociones exclusivas a través de la aplicación.
 | START_DATE        |   |   | EMAIL       | |     | PHONE           |    |  |  | RATING              |
 | END_DATE          |   |   | PHONE       | |     | EMAIL           |    |  |  | COMMENT             | 
 | STATUS            |   |   | ADDRESS     | |     | OPENING_HOURS   |    |  |  | REVIEW_DATE         |
-+-------------------+   |   | PAYMENT_INFO| |     +-----------------+    |  |  +---------------------+
-           |            |   +-------------+ |-------------------------------|
-           |            |                   |------------|               | 
++-------------------+   |   | BIRTHDAY    | |     +-----------------+    |  |  +---------------------+
+           |            |   | SIGN_UP_DATE| |-------------------------------|
+           |            |   +-------------+ |------------|               | 
            |            |                                |               |
            |            |                                |               |  
 +---------------------+ |     +-------------------+      |               |  

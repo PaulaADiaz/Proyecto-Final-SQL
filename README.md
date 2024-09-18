@@ -108,8 +108,8 @@ A continuación se presentan las 10 tablas que componen la base de datos.
 |               | EMAIL             | VARCHAR (80) UNIQUE NOT NULL          |        | Mail del usuario                     |
 |               | PHONE             | VARCHAR (25) NOT NULL                 |        | Teléfono del usuario                 |
 |               | ADDRESS           | VARCHAR (100)                         |        | Dirección del usuario                |
-|               | SIGN_UP_DATE      | DATE                                  |        | Fecha de registro del usuario        |
-
+|               | BIRTHDAY_DATE     | DATE                                  |        | Fecha de nacimiento del usuario      |
+|               | SIGN_UP_DATE      | DATETIME                              |        | Fecha y hora de registro del usuario |
 
 
 | Tabla              | Columna           | Tipo de Datos                         | PK/FK  |  Descripción                                 |
